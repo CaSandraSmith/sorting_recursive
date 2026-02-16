@@ -4,8 +4,8 @@ import math
 def merge(items1, items2):
     """Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    TODO: Running time: O(n) always because we have to loop through every item in each items list
+    TODO: Memory usage: O(n) always because we're creating a new list that is the length of each items list combined"""
     p1 = 0
     p2 = 0
     merged_list = []
@@ -27,8 +27,12 @@ def merge(items1, items2):
 def merge_sort(items):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each recursively, and merging results into a list in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    TODO: Running time: O(n log n) because we're splitting the list in half on each 
+    iteration and doing a linear operation inside each turn
+    TODO: Memory usage: O(n) because we are creating a new list that contains all of 
+    the elements from the input list and this is more complex than the O(log n) complexity
+    of calls added to the call stack
+    """
     # TODO: Check if list is so small it's already sorted (base case)
     if len(items) <= 1:
         return items
@@ -53,8 +57,8 @@ def partition(items, low, high):
     `[low...high]` by choosing a middle pivot from
     that range, moving pivot into index `p`, items less than pivot into range
     `[low...p-1]`, and items greater than pivot into range `[p+1...high]`.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    TODO: Running time: O(n) if we are sorting the whole list because we have to loop over every item in the list
+    TODO: Memory usage: O(1) because we aren't creating any new memory in this function"""
     # TODO: Choose a pivot any way and document your method in docstring above
     pivot = math.floor((low + high) / 2)
     pivot_value = items[pivot]
@@ -83,9 +87,17 @@ def partition(items, low, high):
 def quick_sort(items, low=None, high=None):
     """Sort given items in place by partitioning items in range `[low...high]`
     around a pivot item and recursively sorting each remaining sublist range.
-    TODO: Best case running time: ??? Why and under what conditions?
-    TODO: Worst case running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    TODO: Best case running time: O(n log n) because we're splitting the list in half on each 
+    iteration and doing a linear operation inside each turn in the case that
+    partitioned sections are relatively evenly split during each iteration
+    TODO: Worst case running time: O(n^2) in the case that the selected pivot constantly 
+    creates partitioned sections are skewed so that future iterations aren't spliting 
+    the previous sections in half
+    TODO: Memory usage: O(n) in the worst case that the selected pivot constantly creates 
+    partitioned sections are skewed so that future iterations aren't spliting the previous 
+    sections in half and so the call stack would contain one call per element in the input array.
+    If the partitions are relatively evenly split then the space complexity would be O(log n)
+    """
     # TODO: Check if high and low range bounds have default values (not given)
     if low == None and high == None:
         low = 0
